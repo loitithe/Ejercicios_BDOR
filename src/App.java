@@ -2,23 +2,34 @@ import java.sql.*;
 import java.util.Scanner;
 
 import ejercicio501.listaLibros;
+import ejercicio502.formula1;
 
 public class App {
     private static Scanner sc;
     private static Connection conexion = null;
     private static Statement stmt = null;
+    private static listaLibros listaLibros;
+    private static formula1 formula1;
 
     public static void main(String[] args) throws Exception {
 
         sc = new Scanner(System.in);
         try {
-            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/listaLibros", "postgres",
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/formula1", "postgres",
                     "abc123");
             conexion.setAutoCommit(false);
             stmt = conexion.createStatement();
-            menu();
+            // listaLibros = new listaLibros(conexion);
+            // ejercicio501_menu();
             // stmt.executeUpdate(listaLibros.createAutor());
             // stmt.executeUpdate(listaLibros.createTables());
+            formula1 = new formula1(conexion);
+            // formula1.listarEquipos();
+            // ormula1.listarPilotos();
+            // formula1.resultadoCarrera(1);
+            // formula1.pilotoViejo();
+            formula1.victorias_equipo();
+
             stmt.close();
             conexion.commit();
             conexion.close();
@@ -27,7 +38,7 @@ public class App {
         }
     }
 
-    public static void menu() {
+    public static void ejercicio501_menu() {
         int opt = pedirInt("1. Insertar \n2. Consultar\n3. Actualizar\n4. Eliminar");
         switch (opt) {
             case 1:
@@ -36,33 +47,30 @@ public class App {
                 String nombre_autor = pedirString("Nombre del autor :");
                 String fecha_autor = pedirString("Introduce la fecha autor :");
                 int ano_publicacion = pedirInt("Fecha publicacion :");
-                try {
-                    stmt.executeUpdate(
-                            listaLibros.insertarLibro(id, titulo, nombre_autor, fecha_autor, ano_publicacion));
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                listaLibros.insertarLibro(id, titulo, nombre_autor, fecha_autor, ano_publicacion);
+
                 break;
             case 2:
                 int buscarId = pedirInt("Id libro :");
-                try {
-                    ResultSet rs = stmt.executeQuery(listaLibros.buscarLibro(buscarId));
-                    int numCols = rs.getMetaData().getColumnCount();
-                    while (rs.next()) {
-                        for (int i = 1; i <= numCols; i++) {
-                            System.out.print(rs.getString(i) + " ");
-                        }
-                        System.out.println();
-                    }
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
+                listaLibros.buscarLibro(buscarId);
                 break;
             case 3:
+                int id1 = pedirInt("Id libro a actualizar :");
+                int id2 = pedirInt("nuevo id libro :");
+                if (listaLibros.buscarLibro(id1)) {
 
+                    String titulo2 = pedirString("nuevo Titulo de libro :");
+                    String nombre_autor2 = pedirString("nuevo Nombre del autor :");
+                    String fecha_autor2 = pedirString("nueva fecha autor :");
+                    int ano_publicacion2 = pedirInt("nueva Fecha publicacion :");
+                    listaLibros.actualizarLibro(id1, id2, titulo2, nombre_autor2, fecha_autor2, ano_publicacion2);
+                }
                 break;
             case 4:
-
+                int id_eliminar = pedirInt("Id libro :");
+                if (listaLibros.buscarLibro(id_eliminar)) {
+                    listaLibros.eliminarLibro(id_eliminar);
+                }
                 break;
 
             default:
