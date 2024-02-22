@@ -1,21 +1,19 @@
 import java.sql.*;
 import java.util.Scanner;
 
-import ejercicio501.listaLibros;
-import ejercicio502.formula1;
-
 public class App {
     private static Scanner sc;
     private static Connection conexion = null;
     private static Statement stmt = null;
     private static listaLibros listaLibros;
     private static formula1 formula1;
+    private static Pokemons pokemons;
 
     public static void main(String[] args) throws Exception {
 
         sc = new Scanner(System.in);
         try {
-            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/formula1", "postgres",
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pokemons", "postgres",
                     "abc123");
             conexion.setAutoCommit(false);
             stmt = conexion.createStatement();
@@ -23,13 +21,22 @@ public class App {
             // ejercicio501_menu();
             // stmt.executeUpdate(listaLibros.createAutor());
             // stmt.executeUpdate(listaLibros.createTables());
-            formula1 = new formula1(conexion);
+            /**
+             * ##### formula 1 ######
+             */
+            // formula1 = new formula1(conexion);
             // formula1.listarEquipos();
             // ormula1.listarPilotos();
             // formula1.resultadoCarrera(1);
             // formula1.pilotoViejo();
-            formula1.victorias_equipo();
-
+            // formula1.victorias_equipo();
+            /**
+             * ##### pokemons ######
+             */
+            pokemons = new Pokemons(conexion);
+            // pokemons.insertarPokemon(pedirString("Nombre :"), pedirString("Tipo"),
+            // pedirInt("Nivel "));
+            pokemons.existePokemon(1);
             stmt.close();
             conexion.commit();
             conexion.close();

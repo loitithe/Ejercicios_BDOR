@@ -1,4 +1,4 @@
-package ejercicio501;
+
 
 import java.beans.Statement;
 import java.sql.Connection;
