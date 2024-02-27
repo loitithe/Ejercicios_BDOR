@@ -68,11 +68,11 @@ public class Pokemons {
             String query = "UPDATE objetos.pokemons SET id = ?, titulo = ?, autor.nombre_autor = ?, autor.fecha = ?, año_publicacion = ? WHERE id = ?";
             try {
                 pStatement = conexion.prepareStatement(query);
-                pStatement.setInt(1, id2);
-                pStatement.setString(2, titulo2);
-                pStatement.setString(3, nombre_autor2);
-                pStatement.setString(4, fecha_autor2);
-                pStatement.setInt(5, ano_publicacion2);
+                // pStatement.setInt(1, id2);
+                // pStatement.setString(2, titulo2);
+                // pStatement.setString(3, nombre_autor2);
+                // pStatement.setString(4, fecha_autor2);
+                // pStatement.setInt(5, ano_publicacion2);
                 pStatement.setInt(6, id);
                 int filasAfectadas = pStatement.executeUpdate();
                 System.out.println("filas afectadas  = " + filasAfectadas);

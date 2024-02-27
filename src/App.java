@@ -8,12 +8,13 @@ public class App {
     private static listaLibros listaLibros;
     private static formula1 formula1;
     private static Pokemons pokemons;
+    private static Cursos cursos;
 
     public static void main(String[] args) throws Exception {
 
         sc = new Scanner(System.in);
         try {
-            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/pokemons", "postgres",
+            conexion = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Curso", "postgres",
                     "abc123");
             conexion.setAutoCommit(false);
             stmt = conexion.createStatement();
@@ -26,17 +27,22 @@ public class App {
              */
             // formula1 = new formula1(conexion);
             // formula1.listarEquipos();
-            // ormula1.listarPilotos();
+            // formula1.listarPilotos();
             // formula1.resultadoCarrera(1);
             // formula1.pilotoViejo();
             // formula1.victorias_equipo();
             /**
              * ##### pokemons ######
              */
-            pokemons = new Pokemons(conexion);
+            // pokemons = new Pokemons(conexion);
             // pokemons.insertarPokemon(pedirString("Nombre :"), pedirString("Tipo"),
             // pedirInt("Nivel "));
-            pokemons.existePokemon(1);
+            // pokemons.existePokemon(1);
+            /**
+             * ##### cursos ######
+             */
+            cursos = new Cursos(conexion);
+            ejercicio504_menu();
             stmt.close();
             conexion.commit();
             conexion.close();
@@ -99,6 +105,42 @@ public class App {
         } while (entrada.equals(""));
 
         return entrada;
+    }
+
+    public static void ejercicio504_menu() {
+        int opt = pedirInt("1. Insertar \n2. Consultar\n3. Actualizar\n4. Eliminar");
+        switch (opt) {
+            case 1:
+                int opt2 = pedirInt("1. Estudiante\n2. Profesor\n3. Curso");
+                switch (opt2) {
+                    case 1:
+                        cursos.insertarEstudiante(pedirString("Nombre"), pedirInt("edad"), pedirString("Matricula"),
+                                pedirString("Carrerra"));
+                        break;
+                    case 2:
+                        cursos.insertarProfesor(pedirString("Nombre"), pedirInt("edad"), pedirString("cedula"),
+                                pedirString("Departamento"))1;
+                        break;
+                    case 3:
+                        cursos.insertarCurso(pedirString("Nombre curso: "));
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+
+                break;
+
+            default:
+                break;
+        }
     }
 
     public static int pedirInt(String mensaje) {
