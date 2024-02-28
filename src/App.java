@@ -111,7 +111,7 @@ public class App {
         int opt = pedirInt("1. Insertar \n2. Consultar\n3. Actualizar\n4. Eliminar");
         switch (opt) {
             case 1:
-                int opt2 = pedirInt("1. Estudiante\n2. Profesor\n3. Curso");
+                int opt2 = pedirInt("INSERTAR\n1. Estudiante\n2. Profesor\n3. Curso");
                 switch (opt2) {
                     case 1:
                         cursos.insertarEstudiante(pedirString("Nombre"), pedirInt("edad"), pedirString("Matricula"),
@@ -119,20 +119,52 @@ public class App {
                         break;
                     case 2:
                         cursos.insertarProfesor(pedirString("Nombre"), pedirInt("edad"), pedirString("cedula"),
-                                pedirString("Departamento"))1;
+                                pedirString("Departamento"));
                         break;
                     case 3:
                         cursos.insertarCurso(pedirString("Nombre curso: "));
+                        break;
+                    case 0:
+                        ejercicio504_menu();
                         break;
                     default:
                         break;
                 }
                 break;
             case 2:
-
+                int opt3 = pedirInt("CONSULTAR\n1. Estudiante\n2. Profesor\n3. Curso");
+                switch (opt3) {
+                    case 1:
+                        cursos.consultar(pedirInt("Id del estudiante "), 1);
+                        break;
+                    case 2:
+                        cursos.consultar(pedirInt("Id del profesor"), 2);
+                        break;
+                    case 3:
+                        cursos.consultar(pedirInt("Introduce id del curso"), 3);
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 3:
+                int opt4 = pedirInt("ACTUALIZAR\n1. Estudiante\n2. Profesor\n3. Curso");
+                switch (opt4) {
+                    case 1:
+                        cursos.actualizar(pedirInt("Id del estudiante "), 1,
+                                pedirString("Nombre"), pedirInt("Edad"), pedirString("Texto1"), pedirString("Texto2"));
+                        break;
+                    case 2:
+                        cursos.actualizar(pedirInt("Id del Profesor "), 1,
+                                pedirString("Nombre"), pedirInt("Edad"), pedirString("Texto1"), pedirString("Texto2"));
 
+                        break;
+                    case 3:
+                        cursos.actualizarCurso(pedirInt("Id del curso "), pedirString("Introduce el  nuevo nombre"));
+                        break;
+                    default:
+                        break;
+                }
                 break;
             case 4:
 
@@ -152,6 +184,7 @@ public class App {
             } catch (Exception e) {
                 e.printStackTrace();
                 System.out.println("Debes introducir un integer");
+                sc.nextLine();
             }
         } while (entrada < 0);
 

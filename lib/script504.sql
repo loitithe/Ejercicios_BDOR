@@ -1,7 +1,7 @@
 CREATE SCHEMA objetos;
 
 
-CREATE TYPE objetos.Persona As(f1 text,f2 int);
+CREATE TYPE objetos.Persona As(nombre text,edad int);
 CREATE TYPE objetos.Estudiante As(matricula text,carrera text);
 CREATE TYPE objetos.Profesor As(cedula text,departamento text);
 
